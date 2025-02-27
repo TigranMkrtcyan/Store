@@ -1,0 +1,9 @@
+.cart {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;   
+}
+
+.h1 {
+    width: 500px;
+}
