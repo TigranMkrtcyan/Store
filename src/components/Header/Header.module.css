@@ -1,11 +1,10 @@
 .header {
-    position: fixed;
-    top: 0;
-    margin: 0 auto;
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    width: 1280px;
+    gap: 375px;
+    width: 100%;
     height: 70px;
     border-bottom: 1px solid black;
     background-color: #2d2b2b;
@@ -25,7 +24,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: 50px;
 }
 
 .logo {

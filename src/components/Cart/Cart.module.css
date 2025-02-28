@@ -1,9 +1,65 @@
 .cart {
+    margin-bottom: 30px;
+    padding: 20px;
+    width: 1200px;
+    height: 220px;
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;   
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border-radius: 16px;
 }
 
 .h1 {
     width: 500px;
+}
+
+.title {
+    color: rgb(77, 120, 158)
+}
+
+.btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    font-size: 26px;
+    border: 3px rgb(33, 75, 111) solid;
+    color: rgb(33, 75, 111);
+    transition: 0.3s;
+}
+
+.btn:hover{
+    background-color: #404040;
+    color: rgb(195, 195, 195);
+}
+
+.count {
+    color:  rgb(77, 120, 158);
+}
+
+.price {
+    color: rgb(77, 120, 158);
+    margin-right:20px ;
+}
+
+.del {
+    width: 150px;
+    height: 50px;
+    border-radius: 20px;
+    font-size: 26px;
+    border: 3px rgb(33, 75, 111) solid;
+    color: rgb(33, 75, 111);
+    transition: 0.3s;
+}
+
+.del:hover{
+    background-color: #404040;
+    color: rgb(195, 195, 195);
 }

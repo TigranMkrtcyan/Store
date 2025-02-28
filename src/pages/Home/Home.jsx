@@ -14,7 +14,8 @@ function Home() {
   }, [])
 
   return (
-    <div>
+    <div className= {style.h}>
+      <h1 className= {style.title}>New Men's Clothing</h1>
       <div className={style.home}>     
           {
             prod.map((el) => {

@@ -1,8 +1,16 @@
 .home {
-    padding-top: 160px;
-    width: 1280px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
+}
+
+.h {
+    width: 1200px;
+    text-align: center;
+}
+
+.title {
+    padding: 100px 0px 30px;
+    color:  rgb(195, 195, 195);
 }

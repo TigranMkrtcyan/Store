@@ -1,6 +1,7 @@
 import { IoCartOutline } from "react-icons/io5";
 
 import style from './Header.module.css'
+
 import { NavLink } from "react-router-dom";
 
 function Header() {
