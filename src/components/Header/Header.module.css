@@ -30,3 +30,23 @@ a {
 .logo {
     color: rgb(33, 75, 111);
 }
+
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+}
+
+.btn {
+    width: 100px;
+    height: 30px;
+    border-radius: 16px;
+    border:rgb(33, 75, 111) 2px solid;
+    transition: 0.23s;
+}
+
+.btn:hover {
+    background-color: #404040;
+    color: rgb(195, 195, 195);
+}

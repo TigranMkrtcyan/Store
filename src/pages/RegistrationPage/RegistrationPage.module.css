@@ -1,0 +1,54 @@
+.reg {
+    margin-top: 60px;
+    width: 400px;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.inp {
+    padding: 0 5px;
+    width: 300px;
+    height: 30px;
+    border-radius: 20px;
+    border: rgb(33, 75, 111) 2px solid;
+    outline: none;
+}
+
+.btn {
+    width: 140px;
+    height: 35px;
+    border-radius: 20px;
+    border: rgb(33, 75, 111) 2px solid;
+    transition: 0.23s;
+}
+
+.btn:hover {
+    background-color: #404040;
+    color: rgb(195, 195, 195);
+}
+
+.btns {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.error {
+    color: red;
+}

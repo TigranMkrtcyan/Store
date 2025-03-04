@@ -12,11 +12,11 @@ import LoginPage from './pages/LoginPage/LoginPage'
 import RegistrationPage from './pages/RegistrationPage/RegistrationPage'
 import Profile from './pages/Profile/Profile'
 
-function App({data}) {
+function App({ data }) {
   const [products, setProducts] = useState([])
   const [cart, setCart] = useState([])
   const [users, setUsers] = useState([data.users])
-  
+
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
       .then((res) => res.json())
@@ -61,16 +61,21 @@ function App({data}) {
     setCart([])
   }
 
+  const Add = (newuser) => {
+    setUsers((prev) => [...prev.flat(), newuser]);
+    console.log(users);
+  }
+
   return (
     <div className={style.app} >
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
           <Route path='/products' element={<Products products={products} add={AddToCart} />} />
-          <Route path='/cart' element={<CartPage carts={cart} ChangeCount={ChangeCount}  DeleteProd = {DeleteProd} ClaerPage = {ClaerPage}/>} />
-          <Route path='/login' element = {<LoginPage users = {users}/>} />
-          <Route path='/registration' element = {<RegistrationPage />} />
-          <Route path='/profile' element = {<Profile />}/>
+          <Route path='/cart' element={<CartPage carts={cart} ChangeCount={ChangeCount} DeleteProd={DeleteProd} ClaerPage={ClaerPage} />} />
+          <Route path='/login' element={<LoginPage users={users} />} />
+          <Route path='/registration' element={<RegistrationPage val={data.validationSchema} add={Add} />} />
+          <Route path='/profile' element={<Profile />} />
         </Route>
       </Routes>
     </div>

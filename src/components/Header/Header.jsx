@@ -16,19 +16,19 @@ function Header() {
           <h2>Products</h2>
         </NavLink>
       </div>
-      <div>
+      <div className= {style.box}>
       <NavLink to='/cart'>
         <div>
           <IoCartOutline className={style.cart} />
         </div>
       </NavLink>
         <NavLink to={'/login'}>
-          <button className={style.login}>
+          <button className={style.btn}>
             Login
           </button>
         </NavLink>
         <NavLink to={'/registration'}>
-          <button className={style.login}>
+          <button className={style.btn}>
             Registration
           </button>
         </NavLink>

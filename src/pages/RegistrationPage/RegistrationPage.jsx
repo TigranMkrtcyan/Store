@@ -1,22 +1,42 @@
-import { Field, Form, Formik } from 'formik'
-import React from 'react'
+import { Field, Form, Formik, ErrorMessage } from 'formik'
 
-const RegistrationPage = () => {
+import style from './RegistrationPage.module.css'
+import { NavLink, useNavigate } from 'react-router-dom'
+
+const RegistrationPage = ({ val, add }) => {
+
+  const navigate = useNavigate()
+
   return (
-    <div>
+    <div className={style.reg}>
+      <h1>Registration</h1>
       <Formik
         initialValues={{
-          login : "",
-          password : "",
-          email : "",
+          name: "",
+          password: "",
+          email: "",
+        }}
+        validationSchema={val}
+
+        onSubmit={(values, { resetForm }) => {
+          add(values)
+          resetForm()
+          navigate('/login')
         }}
       >
-        <Form>
-          <Field placeholder = 'login' name = 'login'/>
-          <Field placeholder = 'email' name = 'login'/>
-          <Field placeholder = 'password' name = 'password'/>
-          <button>Login</button>
-          <button>Registration</button>
+        <Form className={style.form}>
+          <Field placeholder='name' name='name' className={style.inp} />
+          <ErrorMessage name='name' component='div' className={style.error} />
+          <Field placeholder='email' name='email' className={style.inp} />
+          <ErrorMessage name='email' component='div' className={style.error} />
+          <Field placeholder='password' name='password' className={style.inp} type='password'/>
+          <ErrorMessage name='password' component='div' className={style.error} />
+          <div className={style.btns}>
+            <NavLink to={"/login"}>
+              <button className={style.btn} type='button'>Login</button>
+            </NavLink>
+            <button className={style.btn} type='submit'>Registration</button>
+          </div>
         </Form>
       </Formik>
     </div>
