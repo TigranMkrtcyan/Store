@@ -3,8 +3,10 @@ import { BrowserRouter } from 'react-router-dom'
 
 import App from './App.jsx'
 
+import data from './Data/Data.js'
+
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <App />
+    <App data = {data}/>
   </BrowserRouter>
 )
