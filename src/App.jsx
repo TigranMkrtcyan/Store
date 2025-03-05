@@ -11,16 +11,19 @@ import CartPage from './pages/CartPage/CartPage'
 import LoginPage from './pages/LoginPage/LoginPage'
 import RegistrationPage from './pages/RegistrationPage/RegistrationPage'
 import Profile from './pages/Profile/Profile'
+import ProductItem from './components/ProductItem/ProductItem'
+import axios from 'axios'
 
 function App({ data }) {
   const [products, setProducts] = useState([])
   const [cart, setCart] = useState([])
-  const [users, setUsers] = useState([data.users])
+  const [users, setUsers] = useState([...data.users])
 
+  const BaseURL = "https://fakestoreapi.com/products"
+ 
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products')
-      .then((res) => res.json())
-      .then((res) => setProducts(res.map((el) => {
+      axios.get(BaseURL)
+      .then((res) => setProducts(res.data.map((el) => {
         return {
           ...el,
           count: 1,
@@ -62,7 +65,7 @@ function App({ data }) {
   }
 
   const Add = (newuser) => {
-    setUsers((prev) => [...prev.flat(), newuser]);
+    setUsers((prev) => [...prev, newuser]);
     console.log(users);
   }
 
@@ -72,6 +75,7 @@ function App({ data }) {
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
           <Route path='/products' element={<Products products={products} add={AddToCart} />} />
+          <Route path='/products/:id' element={<ProductItem URL = {BaseURL}/>}/> 
           <Route path='/cart' element={<CartPage carts={cart} ChangeCount={ChangeCount} DeleteProd={DeleteProd} ClaerPage={ClaerPage} />} />
           <Route path='/login' element={<LoginPage users={users} />} />
           <Route path='/registration' element={<RegistrationPage val={data.validationSchema} add={Add} />} />

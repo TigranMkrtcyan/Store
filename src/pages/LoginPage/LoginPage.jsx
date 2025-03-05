@@ -7,11 +7,12 @@ const LoginPage = ({ users }) => {
 
     const navigate = useNavigate()
 
+
     const auth = (value, users) => {
-        const user = users.find((user) => user.email === value.email)
-        console.log('asda');
-        
+        const user = users.find((el) => el.email === value.email)
+        console.log(user);
         if (user) {
+            debugger
             let bool = user.password === value.password
             console.log(bool);
             if (bool) {
