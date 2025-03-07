@@ -1,8 +1,12 @@
+import { useContext } from 'react'
 import Cart from '../../components/Cart/Cart'
 
 import style from './CartPage.module.css'
+import { MyContext } from '../../Data/context'
 
-function CartPage({ carts, ChangeCount, DeleteProd, ClaerPage }) {
+function CartPage() {
+
+  const { carts, ChangeCount, DeleteProd, ClaerPage } = useContext(MyContext)
 
   const clear = () => {
     ClaerPage()

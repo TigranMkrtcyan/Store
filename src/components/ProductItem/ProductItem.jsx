@@ -1,13 +1,16 @@
-import { useState , useEffect } from "react"
+import { useState , useEffect, useContext } from "react"
 import { useParams } from "react-router-dom"
 
 import axios from "axios"
 
 import style from './ProductItem.module.css'
+import { MyContext } from "../../Data/context"
 
-const ProductItem = ({ URL }) => {
+const ProductItem = () => {
     const [prod, setProd] = useState([])
     const { id } = useParams()
+
+    const { URL } = useContext(MyContext)
 
     useEffect(() => {
         axios.get(URL + `/${id}`)

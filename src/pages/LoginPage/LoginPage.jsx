@@ -2,11 +2,14 @@ import { Formik, Form, Field } from 'formik'
 import { useNavigate } from 'react-router-dom'
 
 import style from './LoginPage.module.css'
+import { useContext } from 'react'
+import { MyContext } from '../../Data/context'
 
-const LoginPage = ({ users }) => {
+const LoginPage = () => {
 
     const navigate = useNavigate()
 
+    const { users } = useContext(MyContext)
 
     const auth = (value, users) => {
         const user = users.find((el) => el.email === value.email)

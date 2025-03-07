@@ -2,10 +2,13 @@ import { Field, Form, Formik, ErrorMessage } from 'formik'
 
 import style from './RegistrationPage.module.css'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import { MyContext } from '../../Data/context'
 
-const RegistrationPage = ({ val, add }) => {
+const RegistrationPage = () => {
 
   const navigate = useNavigate()
+  const { val, add } = useContext(MyContext)
 
   return (
     <div className={style.reg}>
