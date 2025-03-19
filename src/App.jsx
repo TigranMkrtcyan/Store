@@ -1,101 +1,59 @@
-import { useEffect, useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
-import { MyContext } from './Data/context'
+import { useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { MyContext } from './Data/context';
+import axios from 'axios';
 
-import axios from 'axios'
+import Home from './pages/Home/Home';
+import Layout from './components/Layout/Layout';
+import Products from './pages/Products/Products';
+import CartPage from './pages/CartPage/CartPage';
+import LoginPage from './pages/LoginPage/LoginPage';
+import RegistrationPage from './pages/RegistrationPage/RegistrationPage';
+import Profile from './pages/Profile/Profile';
+import ProductItem from './components/ProductItem/ProductItem';
 
-import Home from './pages/Home/Home'
-import Layout from './components/Layout/Layout'
-import Products from './pages/Products/Products'
-import CartPage from './pages/CartPage/CartPage'
-import LoginPage from './pages/LoginPage/LoginPage'
-import RegistrationPage from './pages/RegistrationPage/RegistrationPage'
-import Profile from './pages/Profile/Profile'
-import ProductItem from './components/ProductItem/ProductItem'
-
-import style from './App.module.css'
+import style from './App.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProductAC } from './store/store';
 
 function App({ data }) {
-  const [products, setProducts] = useState([])
-  const [cart, setCart] = useState(() => {
-    const savedCart = localStorage.getItem('cart');
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
-  const [users, setUsers] = useState([...data.users])
+  const dispatch = useDispatch();
+  const { products, cart, users } = useSelector((state) => state);
 
-  const BaseURL = "https://fakestoreapi.com/products"
+  const BaseURL = "https://fakestoreapi.com/products";
 
   useEffect(() => {
     axios.get(BaseURL)
-      .then((res) => setProducts(res.data.map((el) => {
-        return {
-          ...el,
-          count: 1,
-          cartPrice: el.price
-        }
-      })))
-  }, [])
+      .then((res) => {
+        dispatch(getProductAC(res.data))
+      })
+      .catch((error) => console.error("Error fetching products:", error));
+  }, [dispatch]);
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
-  const DeleteProd = (id) => {
-    setCart(prevCart => {
-      const updatedCart = prevCart.filter((el) => el.id !== id);
-      localStorage.setItem('cart', JSON.stringify(updatedCart));
-      return updatedCart;
-    });
-  }
-
-  const ChangeCount = (count, id) => {
-    setCart(prevCart => {
-      const updatedCart = prevCart.map((el) => el.id === id ? { ...el, count, cartPrice: el.price * count } : el);
-      localStorage.setItem('cart', JSON.stringify(updatedCart));
-      return updatedCart;
-    });
-  }
-
   const AddToCart = (prod) => {
-    setCart(prevCart => {
-      let updatedCart;
-      if (!prevCart.some(item => item.id === prod.id)) {
-        updatedCart = [...prevCart, { ...prod, count: 1 }];
-      } else {
-        updatedCart = prevCart.map(el =>
-          el.id === prod.id ? { ...el, count: el.count + 1, cartPrice: el.cartPrice + el.price } : el
-        );
-      }
-      localStorage.setItem('cart', JSON.stringify(updatedCart));
-      return updatedCart;
-    });
+    dispatch({ type: 'addtocart', payload: prod })
   };
 
-  const ClaerPage = () => {
-    setCart([]);
-    localStorage.removeItem('cart');
-  }
-
-  const Add = (newuser) => {
-    setUsers((prev) => [...prev, newuser]);
-    console.log(users);
-  }
+  const AddUser = (newUser) => {
+    dispatch({ type: 'adduser', payload: newUser })
+  };
 
   return (
-    <div className={style.app} >
+    <div className={style.app}>
       <MyContext.Provider value={{
         products,
         add: AddToCart,
         URL: BaseURL,
         carts: cart,
-        ChangeCount,
-        DeleteProd,
         CartPage,
         users,
         val: data.validationSchema,
-        Add
-      }}
-      >
+        Add: AddUser
+      }}>
         <Routes>
           <Route path='/' element={<Layout />}>
             <Route index element={<Home />} />
@@ -109,7 +67,7 @@ function App({ data }) {
         </Routes>
       </MyContext.Provider>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

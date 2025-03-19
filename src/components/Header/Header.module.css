@@ -20,6 +20,7 @@ a {
     text-decoration: none;
 }
 
+
 .nav {
     display: flex;
     justify-content: center;
@@ -28,7 +29,7 @@ a {
 }
 
 .logo {
-    color: rgb(33, 75, 111);
+    color: rgb(195, 195, 195);
 }
 
 .box {
